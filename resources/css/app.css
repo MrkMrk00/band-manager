@@ -1,0 +1,18 @@
+@import "swup-page-transition.css";
+@import "navigation.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+@layer components {
+    .btn {
+        @apply rounded-2xl shadow-md transition-all
+            py-2 px-4 bg-white hover:brightness-90;
+    }
+}

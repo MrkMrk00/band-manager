@@ -1,0 +1,21 @@
+services:
+    band-manager-db:
+        image: mysql:8.0
+        restart: always
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_ROOT_PASSWORD: "strongpassword"
+            MYSQL_DATABASE: "band-manager"
+        volumes:
+            - ./db_data:/var/lib/mysql:rw
+
+    phpmyadmin:
+        image: phpmyadmin
+        restart: always
+        ports:
+            - 8069:80
+        environment:
+            PMA_HOST: band-manager-db
+            PMA_USER: root
+            PMA_PASSWORD: strongpassword
