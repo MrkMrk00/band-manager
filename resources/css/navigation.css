@@ -4,11 +4,11 @@
 
 @layer components {
     .nav-link {
-        @apply border-b-0 border-b-accent;
+        @apply border-b-transparent border-b-4;
         color: #000;
         height: 100%;
         width: 100%;
-        transition: color, border-bottom-width 200ms ease-in-out;
+        transition: color, border-color 200ms ease-in-out;
         text-align: center;
         line-height: 64px;
     }
@@ -18,7 +18,7 @@
     }
 
     .nav-link.active {
-        @apply border-b-4;
+        @apply border-b-accent;
     }
 
     .nav-user-icon path {
