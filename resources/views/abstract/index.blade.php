@@ -15,7 +15,7 @@
 @endsection
 
 @section('body')
-    <bm-navigation></bm-navigation>
+    @include('inc.navigation')
     <main id="page_content" class="transition-fade">
         @yield('page_content', '')
     </main>

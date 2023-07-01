@@ -11,6 +11,29 @@ use \Illuminate\Foundation\Auth\Access\Authorizable as DBAuthorizable;
 //use Illuminate\Auth\Passwords\CanResetPassword as DBPasswordReset;
 //use Illuminate\Contracts\Auth\CanResetPassword;
 
+/**
+ * BandManager\App\Models\User
+ *
+ * @property int $id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $display_name
+ * @property string|null $email
+ * @property mixed|null $password
+ * @property string|null $fb_id
+ * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereDisplayName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereFbId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class User extends Model implements Authenticatable, Authorizable
 {
     use HasFactory, DBAuthorizable, DBAuthenticable;
@@ -49,8 +72,9 @@ class User extends Model implements Authenticatable, Authorizable
         'password' => 'hashed',
     ];
 
-    public function getDisplayName(): string
+    public function getShortName(): string
     {
-        return $this->display_name;
+        $parts = explode(' ', $this->display_name);
+        return $parts[0];
     }
 }

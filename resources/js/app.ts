@@ -1,7 +1,4 @@
-import './custom-elements';
 import Swup from 'swup';
-import customElement from './custom-elements';
-import Navbar from './components/Navbar';
 
 interface IUser {
     id: number;
@@ -16,16 +13,17 @@ type BandManagerNamespace = {
     User: IUser;
 };
 
+const swup = new Swup({
+    containers: ['#page_content'],
+});
+
 declare global {
     interface Window {
         BandManager: BandManagerNamespace;
+        Swup: typeof swup;
     }
 
     const BandManager: BandManagerNamespace;
 }
 
-new Swup({
-    containers: ['#page_content'],
-});
-
-customElement('bm-navigation', Navbar);
+window.Swup = swup;

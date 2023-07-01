@@ -26,10 +26,6 @@ Blade::directive('icon', function (string $expr) {
     $doc = new DOMDocument();
     $doc->loadXML($svg);
 
-    if (empty($attrMapping['class'])) {
-        $attrMapping['class'] = 'fas';
-    }
-
     /** @var DOMElement $svg */
     $svg = $doc->getElementsByTagName('svg')->item(0);
     foreach ($attrMapping as $name => $value) {

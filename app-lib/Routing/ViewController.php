@@ -16,8 +16,8 @@ class ViewController extends Controller
         $this->request = $request;
         $method = strtoupper($request->method());
 
-        if (property_exists($this, $method)) {
-            return $this->{$method};
+        if (method_exists($this, $method)) {
+            return $this->{$method}();
         }
 
         throw new NotFoundException();
@@ -26,5 +26,17 @@ class ViewController extends Controller
     protected function render(string $viewName, array $data = [], array $mergeData = []): Response
     {
         return new Response(\view($viewName, $data, $mergeData));
+    }
+
+    protected function json(string|array|\stdClass|\JsonSerializable $content, int $status = 200, array $headers = []): Response
+    {
+        return new Response(
+            content: json_encode($content),
+            status: $status,
+            headers: array_merge(
+                ['Content-Type' => 'application/json'],
+                $headers,
+            ),
+        );
     }
 }

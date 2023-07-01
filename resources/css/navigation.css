@@ -4,31 +4,64 @@
 
 @layer components {
     .nav-link {
+        @apply border-b-0 border-b-accent;
         color: #000;
-        transition: color 200ms ease-in-out;
+        height: 100%;
+        width: 100%;
+        transition: color, border-bottom-width 200ms ease-in-out;
+        text-align: center;
+        line-height: 64px;
     }
 
     .nav-link:hover {
-        @apply text-emerald-600;
+        @apply text-accent;
+    }
+
+    .nav-link.active {
+        @apply border-b-4;
+    }
+
+    .nav-user-icon path {
+        @apply fill-black;
+        transition: fill 200ms ease-in-out;
+    }
+
+    .active .nav-user-icon path {
+        @apply fill-accent;
     }
 
     .bm-navbar {
-        @apply shadow-2xl;
-    }
-
-    .bm-mobile-nav {
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        align-content: center;
         width: 100%;
-        position: absolute;
-        left: 0;
-        bottom: 0;
-
         padding: 0 1em;
     }
 
-    .bm-mobile-nav > * {
-        padding: 1em 0;
+    .bm-navbar.mobile {
+        @apply shadow-2xl;
+    }
+
+    .bm-navbar:not(.mobile) {
+        @apply shadow;
+        height: 64px;
+        justify-content: space-between;
+    }
+
+    .mb-navbar.mobile {
+        justify-content: center;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+    }
+
+    .mb-navbar.mobile .non-mobile,
+    .mb-navbar:not(.mobile) .only-mobile {
+        display: none;
+    }
+
+    .mb-navbar.mobile .only-mobile,
+    .mb-navbar:not(.mobile) .not-mobile {
+        display: block;
     }
 }

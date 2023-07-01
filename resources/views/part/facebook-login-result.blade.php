@@ -2,7 +2,9 @@
 
 @section('body')
     @if(!empty($success))
-        huehuehuehfiausfgika
+        <script type="text/javascript">
+            window.close();
+        </script>
     @else
         <main class="flex flex-row justify-center items-center w-full h-full">
             <span>

@@ -13,5 +13,6 @@
 </head>
 <body>
 @yield('body', '')
+@yield('after_body', '')
 </body>
 </html>

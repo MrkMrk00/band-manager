@@ -156,12 +156,13 @@ return [
     */
 
     'providers' => ServiceProvider::defaultProviders()->merge([
-        BandManager\LibServiceProvider::class,
+        BandManager\App\Providers\AppServiceProvider::class,
         BandManager\App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         BandManager\App\Providers\EventServiceProvider::class,
         BandManager\App\Providers\RouteServiceProvider::class,
         BandManager\App\Providers\ForeignApisServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
     ])->toArray(),
 
     /*
