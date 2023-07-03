@@ -1,4 +1,5 @@
 import Swup from 'swup';
+import Cookies from 'js-cookie';
 
 interface IUser {
     id: number;
@@ -27,3 +28,4 @@ declare global {
 }
 
 window.Swup = swup;
+window.Cookies = Cookies;

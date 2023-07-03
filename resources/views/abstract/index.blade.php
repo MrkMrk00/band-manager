@@ -5,18 +5,17 @@
     $userJson = json_encode($user);
 @endphp
 
-@section('head')
-    @parent
-    <script type="text/javascript">
+@push('head')
+    <x-script cacheKey="IndexAbstractTpl__js-global-props-pass">
         window.BandManager = {
             User: {!! $userJson !!},
         };
-    </script>
-@endsection
+    </x-script>
+@endpush
 
 @section('body')
     @include('inc.navigation')
-    <main id="page_content" class="transition-fade">
+    <main id="page_content" class="transition-fade @yield('page_content--classes', '')">
         @yield('page_content', '')
     </main>
 @endsection

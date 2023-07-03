@@ -21,10 +21,21 @@ window.Swup.on('clickLink', function (ev) {
         link.classList.remove('active');
     }
 
-    let link = ev.target as HTMLElement;
-    if (link.tagName !== 'a') {
-        link = link.closest('a')!;
+    let link = ev.target as HTMLElement | null;
+    if (!link) return;
+
+    if (link.tagName !== 'A') {
+        link = link.closest('a.nav-link');
+    }
+    if (!link) return;
+
+    if (!link.classList.contains('nav-link')) {
+        let href = link.attributes.getNamedItem('href')!.value.split(/(\?)|(#)/)[0];
+
+        link = document.querySelector(`.bm-navbar a.nav-link[href="${href}"]`);
     }
 
-    link.classList.add('active');
+    if (link) {
+        link.classList.add('active');
+    }
 });

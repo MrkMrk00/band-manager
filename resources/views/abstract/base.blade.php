@@ -9,10 +9,11 @@
     @vite('resources/js/app.ts')
     @vite('resources/css/app.css')
 
-    @yield('head', '')
+    @stack('head')
 </head>
 <body>
 @yield('body', '')
 @yield('after_body', '')
+<script type="text/javascript">document.addEventListener('DOMContentLoaded',()=>{@stack('onready')});</script>
 </body>
 </html>

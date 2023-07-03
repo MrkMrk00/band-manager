@@ -28,11 +28,11 @@
     </div>
     <div>
         <a @class([
-            'flex', 'flex-row', 'justify-end', 'items-center', 'gap-2', 'h-full',
+            'flex', 'flex-row', 'justify-end', 'items-center', 'gap-2', 'h-full', 'nav-link',
             'active' => Request::is('me', 'me/**'),
         ]) href="/me">
-            @icon('circle-user', ['height' => '24px', 'class' => 'nav-user-icon'])
-            <span>{{ $user->getShortName() }}</span>
+            <x-icon name="circle-user" height="24px" class="nav-user-icon" />
+            <span>{{ str_truncate($user->getShortName()) }}</span>
         </a>
     </div>
 </nav>

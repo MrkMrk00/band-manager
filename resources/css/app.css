@@ -11,8 +11,12 @@ html, body {
 }
 
 @layer components {
-    .btn {
+    .bm-btn {
         @apply rounded-2xl shadow-md transition-all
             py-2 px-4 bg-white hover:brightness-90;
+    }
+
+    .bm-input {
+        @apply rounded-2xl border focus:outline-accent;
     }
 }

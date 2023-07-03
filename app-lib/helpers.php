@@ -16,3 +16,15 @@ function csrf_verify($token): bool
         is_string($token) &&
         hash_equals($request->session()->token(), $token);
 }
+
+
+function str_truncate(string $string, int $lengthWithoutSuffix = 10, string $suffix = '…'): string
+{
+    $string = trim($string);
+
+    if (mb_strlen($string) < $lengthWithoutSuffix) {
+        return $string;
+    }
+
+    return mb_substr($string, 0, $lengthWithoutSuffix - 1) . $suffix;
+}
