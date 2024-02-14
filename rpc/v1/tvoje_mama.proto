@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package rpc.v1;
+
+option go_package = "github.com/MrkMrk00/band-manager/internal/rpcgen/rpc/v1";
+
+message GreetRequest {
+    string name = 1;
+  }
+  
+  message GreetResponse {
+    string greeting = 1;
+  }
+  
+  service GreetService {
+    rpc Greet(GreetRequest) returns (GreetResponse) {}
+  }
