@@ -1,0 +1,12 @@
+services:
+    database:
+        image: mysql:8.0
+        container_name: band-manager-mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: strongpassword
+            MYSQL_DATABASE: band_manager
+        ports:
+            - 3306:3306
+        volumes:
+            - ./db_data:/var/lib/mysql
