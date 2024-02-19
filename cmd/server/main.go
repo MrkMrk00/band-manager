@@ -1,30 +1,51 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"log"
 	"net/http"
+	"os"
+	"strconv"
 
-	"github.com/99designs/gqlgen/graphql"
-	"github.com/99designs/gqlgen/graphql/handler"
-	"github.com/99designs/gqlgen/graphql/playground"
-	"github.com/MrkMrk00/band-manager/internal/generated"
-	gql "github.com/MrkMrk00/band-manager/pkg/graphql"
+	"github.com/MrkMrk00/band-manager/pkg/routing"
 )
 
+const defaultPort = 8080
+
+type LoggingHandler struct {
+	wrapping http.Handler
+}
+
+func (h LoggingHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	log.Printf("%s %s", r.Method, r.URL)
+
+	h.wrapping.ServeHTTP(w, r)
+}
+
+func runServer(server http.Handler) error {
+	serverPort := defaultPort
+	if port := os.Getenv("SERVER_PORT"); port != "" {
+		var err error
+		serverPort, err = strconv.Atoi(port)
+
+		if err != nil {
+			panic(err)
+		}
+	}
+
+	log.Printf("Server is running on port %d", serverPort)
+	return http.ListenAndServe(
+		fmt.Sprintf(":%d", serverPort),
+		LoggingHandler{wrapping: server},
+	)
+}
+
 func main() {
-	srv := handler.NewDefaultServer(generated.NewExecutableSchema(gql.NewResolver()))
-	srv.AroundFields(func(ctx context.Context, next graphql.Resolver) (res interface{}, err error) {
-		rc := graphql.GetFieldContext(ctx)
-		fmt.Println("Entered", rc.Object, rc.Field.Name)
-		res, err = next(ctx)
-		fmt.Println("Left", rc.Object, rc.Field.Name, "=>", res, err)
-		return res, err
-	})
+	mux := http.NewServeMux()
 
-	http.Handle("/", playground.Handler("Starwars", "/query"))
-	http.Handle("/query", srv)
+	for path, handler := range *routing.GetRoutes() {
+		mux.HandleFunc(path, handler)
+	}
 
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatalln(runServer(mux))
 }
