@@ -1,6 +1,6 @@
 import 'vite/modulepreload-polyfill'
 import 'htmx.org';
-import '../styles.css';
+import './styles.css';
 import './toasts';
 
 document.body.addEventListener('htmx:afterRequest', function (ev_) {
