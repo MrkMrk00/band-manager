@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+	<meta charset="utf-8">
+	<title>Go</title>
+	{{ if IsDev }}
+	<script type="module" src="http://localhost:5173/@vite/client"></script>
+	<script type="module" src="http://localhost:5173/src/main.ts"></script>
+	{{ end }}
+</head>
+
+<body>
+	<header>
+		<nav hx-boost="true" class="flex flex-row justify-between items-center p-4">
+			<a href="/tvoje_mama">Tvoje mama</a>
+		</nav>
+	</header>
+</body>
+
+</html>

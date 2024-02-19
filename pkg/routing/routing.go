@@ -8,6 +8,6 @@ type RouteCollection map[string]http.HandlerFunc
 
 func GetRoutes() *RouteCollection {
 	return &RouteCollection{
-		"/": index,
+		"/{$}": index,
 	}
 }

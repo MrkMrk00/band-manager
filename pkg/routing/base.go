@@ -1,8 +1,10 @@
 package routing
 
 import (
-	"html/template"
+	"log"
 	"net/http"
+
+	"github.com/MrkMrk00/band-manager/pkg/templates"
 )
 
 func index(w http.ResponseWriter, r *http.Request) {
@@ -10,5 +12,5 @@ func index(w http.ResponseWriter, r *http.Request) {
 		"Header": "Band Manager",
 	}
 
-	template.Must(template.ParseFiles("templ/base.go.html")).Execute(w, data)
+	log.Println(templates.WriteTemplate(w, "base.go.html", data))
 }
