@@ -1,16 +1,19 @@
 package routing
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/MrkMrk00/band-manager/pkg/templates"
 )
 
-func index(w http.ResponseWriter, r *http.Request) {
-	data := map[string]interface{}{
-		"Header": "Band Manager",
+func index(ctx *AppRequestContext) {
+	if err := templates.WriteTemplate(ctx.ResponseWriter(), "pages/index", nil); err != nil {
+		http.Error(ctx.ResponseWriter(), err.Error(), http.StatusInternalServerError)
 	}
+}
 
-	log.Println(templates.WriteTemplate(w, "base.go.html", data))
+func login(ctx *AppRequestContext) {
+	if err := templates.WriteTemplate(ctx.ResponseWriter(), "pages/login", nil); err != nil {
+		http.Error(ctx.ResponseWriter(), err.Error(), http.StatusInternalServerError)
+	}
 }

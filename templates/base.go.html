@@ -3,19 +3,20 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>{{ block "title" }}{{ end }}</title>
+    <title>{{ block "title" . }}Band Manager{{ end }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     {{ if IsDev }}
     <script type="module" src="http://localhost:5173/@vite/client"></script>
-    <script type="module" src="http://localhost:5173/main.ts"></script>
+    <script type="module" src="http://localhost:5173/main.tsx"></script>
     {{ end }}
-    {{ block "head" }}{{ end }}
+    {{ block "head" . }} {{ end }}
 </head>
 
 <body>
-    {{ block "nav"}}
-    {{ include "nav.go.html" }}
-    {{ end }}
-    {{ block "content" }}{{ end }}
+    {{ template "nav" . }}
+    {{ block "content" . }}{{ end }}
+
+    <bm-toaster></bm-toaster>
 </body>
 
 </html>

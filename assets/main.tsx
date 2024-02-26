@@ -10,7 +10,7 @@ declare global {
     }
 }
 
-customElement('bm-toaster', {}, Toaster);
+customElement('bm-toaster', {}, () => <Toaster position="top-center" />);
 
 window.Toast = toast;
 

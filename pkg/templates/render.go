@@ -2,6 +2,7 @@ package templates
 
 import (
 	"bytes"
+	"fmt"
 	htmltemplate "html/template"
 	"io"
 
@@ -15,10 +16,20 @@ var templateFuncs = htmltemplate.FuncMap{
 }
 
 func WriteTemplate(w io.Writer, templateName string, data interface{}) error {
-	template := htmltemplate.New(templateName).Funcs(templateFuncs)
-	template.ParseFiles(templateDir + "/" + templateName)
+	t, err := htmltemplate.New("base.go.html").
+		Funcs(templateFuncs).
+		ParseGlob(fmt.Sprintf("%s/*.go.html", templateDir))
 
-	return template.Execute(w, data)
+	if err != nil {
+		return err
+	}
+
+	t, err = t.ParseFiles(fmt.Sprintf("%s/%s.go.html", templateDir, templateName))
+	if err != nil {
+		return err
+	}
+
+	return t.Execute(w, data)
 }
 
 func RenderTemplate(templateName string, data interface{}) (string, error) {

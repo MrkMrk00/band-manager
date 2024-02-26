@@ -8,7 +8,7 @@ export default defineConfig({
         outDir: 'build',
         manifest: true,
         rollupOptions: {
-            input: 'assets/main.ts',
+            input: 'assets/main.tsx',
         },
     },
 });
