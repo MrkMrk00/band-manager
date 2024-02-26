@@ -1,21 +1,21 @@
 <!doctype html>
 <html lang="cs">
-    <head>
-        <meta charset="utf-8" />
-        <title>{{ .Header }}</title>
-        {{ if IsDev }}
-        <script type="module" src="http://localhost:5173/@vite/client"></script>
-        <script type="module" src="http://localhost:5173/main.ts"></script>
-        {{ end }}
-    </head>
 
-    <body>
-        <header>
-            <nav hx-boost="true" class="flex flex-row items-center justify-between p-4">
-                <a href="/tvoje_mama">Tvoje mama</a>
-            </nav>
-        </header>
+<head>
+    <meta charset="utf-8" />
+    <title>{{ block "title" }}{{ end }}</title>
+    {{ if IsDev }}
+    <script type="module" src="http://localhost:5173/@vite/client"></script>
+    <script type="module" src="http://localhost:5173/main.ts"></script>
+    {{ end }}
+    {{ block "head" }}{{ end }}
+</head>
 
-        <bm-toaster></bm-toaster>
-    </body>
+<body>
+    {{ block "nav"}}
+    {{ include "nav.go.html" }}
+    {{ end }}
+    {{ block "content" }}{{ end }}
+</body>
+
 </html>

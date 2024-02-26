@@ -1,7 +1,18 @@
 import 'vite/modulepreload-polyfill';
 import 'htmx.org';
 import './styles.css';
-import './toasts';
+import { customElement } from './utils';
+import { Toaster, toast } from 'solid-toast';
+
+declare global {
+    interface Window {
+        Toast: typeof toast;
+    }
+}
+
+customElement('bm-toaster', {}, Toaster);
+
+window.Toast = toast;
 
 document.body.addEventListener('htmx:afterRequest', function (ev_) {
     const ev = ev_ as CustomEvent<{ failed: boolean; successful: boolean; xhr: XMLHttpRequest }>;
